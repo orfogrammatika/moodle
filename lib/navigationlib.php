@@ -2792,19 +2792,6 @@ class global_navigation extends navigation_node {
                     self::TYPE_SETTING, null, 'search');
         }
 
-        if ($navoptions->calendar) {
-            $courseid = $COURSE->id;
-            $params = array('view' => 'month');
-            if ($courseid != $SITE->id) {
-                $params['course'] = $courseid;
-            }
-
-            // Calendar
-            $calendarurl = new moodle_url('/calendar/view.php', $params);
-            $node = $coursenode->add(get_string('calendar', 'calendar'), $calendarurl, self::TYPE_CUSTOM, null, 'calendar');
-            $node->showinflatnavigation = true;
-        }
-
         if (isloggedin()) {
             $usercontext = context_user::instance($USER->id);
             if (has_capability('moodle/user:manageownfiles', $usercontext)) {
@@ -4903,15 +4890,6 @@ class settings_navigation extends navigation_node {
                 has_capability('moodle/user:editprofile', $usercontext)) {
                 $url = new moodle_url('/user/course.php', array('id' => $user->id, 'course' => $course->id));
                 $useraccount->add(get_string('coursepreferences'), $url, self::TYPE_SETTING, null, 'coursepreferences');
-            }
-        }
-
-        // Add "Calendar preferences" link.
-        if (isloggedin() && !isguestuser($user)) {
-            if ($currentuser && has_capability('moodle/user:editownprofile', $systemcontext) ||
-                    has_capability('moodle/user:editprofile', $usercontext)) {
-                $url = new moodle_url('/user/calendar.php', array('id' => $user->id));
-                $useraccount->add(get_string('calendarpreferences', 'calendar'), $url, self::TYPE_SETTING, null, 'preferredcalendar');
             }
         }
 

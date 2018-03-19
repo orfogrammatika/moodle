@@ -36,3 +36,8 @@ composer.phar
 /lib/yuilib/*/*/*-coverage.js
 atlassian-ide-plugin.xml
 /node_modules/
+
+theme/boosted
+question/type/dictation
+admin/tool/pluginskel
+
